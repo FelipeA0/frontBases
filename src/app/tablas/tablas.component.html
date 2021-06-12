@@ -1,0 +1,157 @@
+<div class="container mt-3 mb-5">
+
+  <div class="row">
+      <div class="col mt-5 text-center">
+          <h1> Visualizador y editor de tablas </h1>
+      </div>
+  </div>
+
+  <div class="row mt-5">
+      <div class="col">
+                  <table class="mx-auto">
+                  <tbody>
+                      <tr>
+                          <td class="text-center"> <h4>Base de datos</h4> </td>
+                          <td class="text-center"> <h4>Tabla</h4>  </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <div class="col mt-5 text-center">
+                                <select [(ngModel)]="db" (change)="getDB()" class="custom-select">
+                                  <option *ngFor="let item of dataDB" [ngValue]="item">{{item.name}}</option>
+                                </select>
+                              </div>
+                          </td>
+                          <td>
+                              <div class="col mt-5 text-center">
+                                <select [(ngModel)]="table" (change)="getTable()" class="custom-select">
+                                  <option *ngFor="let item of dataTable" [ngValue]="item">{{item.name}}</option>
+                                </select>
+                              </div>
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-outline-primary mt-5" (click)="mostrarTabla()">Mostrar tabla</button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+
+      </div>
+      <div class="row mt-5">
+        <div class="col">
+          <div *ngIf="bandPAY">
+            <table class="table">
+              <thead class="thead-dark">
+                <th>Title</th>
+                <th>Sal</th>
+                <th>Modificar Dato</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of pay">
+                  <th>{{item.TITLE}}</th>
+                  <th>{{item.SAL}}</th>
+                  <th><button type="button" class="btn btn-danger" (click)="deletePay(item.TITLE,item.SAL)" >Eliminar</button><button type="button" class="btn btn-success ml-2" (click)="updateOne(item.TITLE, item.SAL)">Actualizar</button></th>
+                </tr>
+                <tr>
+                  <th><input #title type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></th>
+                  <th><input #sal type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></th>
+                  <th><button type="button" class="btn btn-primary" (click)="updatePay(title.value,sal.value)">Guardar</button> <button type="button" class="btn btn-danger ml-2" (click)="cancelar('PAY')" >Cancelar</button> </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div *ngIf="bandASG">
+            <table class="table">
+              <thead class="thead-dark">
+                <th>ENO</th>
+                <th>PNO</th>
+                <th>RESP</th>
+                <th>DUR</th>
+                <th>Modificar Dato</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of asg">
+                  <th>{{item.ENO}}</th>
+                  <th>{{item.PNO}}</th>
+                  <th>{{item.RESP}}</th>
+                  <th>{{item.DUR}}</th>
+                  <th><button type="button" class="btn btn-danger" (click)="deleteAsg(item.ENO,item.PNO, item.RESP, item.DUR)">Eliminar</button><button type="button" class="btn btn-success ml-2"(click)="updateTwo(item.ENO,item.PNO,item.RESP,item.DUR)"> Actualizar</button></th>
+                </tr>
+                <tr>
+                  <th><input #eno type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></th>
+                  <th><input #pno type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></th>
+                  <th><input #resp type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></th>
+                  <th><input #dur type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></th>
+                  <th><button type="button" class="btn btn-primary" (click)="updateAsg(eno.value,pno.value,resp.value,dur.value)">Guardar</button> <button type="button" class="btn btn-danger ml-2" (click)="cancelar('ASG')" >Cancelar</button> </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div *ngIf="bandPROJ">
+            <table class="table">
+              <thead class="thead-dark">
+                <th>PNO</th>
+                <th>PNAME</th>
+                <th>BUDGET</th>
+                <th>Modificar Dato</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of proj">
+                  <th>{{item.PNO}}</th>
+                  <th>{{item.PNAME}}</th>
+                  <th>{{item.BUDGET}}</th>
+                  <th><button type="button" class="btn btn-danger" (click)="deleteProj(item.PNO,item.PNAME, item.BUDGET)">Eliminar</button><button type="button" class="btn btn-success ml-2" (click)="updateThree(item.PNO,item.PNAME,item.BUDGET)" >Actualizar</button></th>
+                </tr>
+                <tr>
+                  <th><input #pno type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></th>
+                  <th><input #pname type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></th>
+                  <th><input #budget type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></th>
+                  <th><button type="button" class="btn btn-primary" (click)="updateProj(pno.value,pname.value,budget.value)">Guardar</button> <button type="button" class="btn btn-danger ml-2" (click)="cancelar('PROJ')" >Cancelar</button> </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div *ngIf="bandEMP">
+            <table class="table">
+              <thead class="thead-dark">
+                <th>ENO</th>
+                <th>ENAME</th>
+                <th>TITLE</th>
+                <th>Modificar Dato</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of emp">
+                  <th>{{item.ENO}}</th>
+                  <th>{{item.ENAME}}</th>
+                  <th>{{item.TITLE}}</th>
+                  <th><button type="button" class="btn btn-danger" (click)="deleteEmp(item.ENO,item.ENAME, item.TITLE)">Eliminar</button><button type="button" class="btn btn-success ml-2" (click)="updateFour(item.ENO,item.ENAME,item.TITLE)" >Actualizar</button></th>
+                </tr>
+                <tr>
+                  <th><input #eno type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></th>
+                  <th><input #ename type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></th>
+                  <th><input #title type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></th>
+                  <th><button type="button" class="btn btn-primary" (click)="updateEmp(eno.value,ename.value,title.value)">Guardar</button> <button type="button" class="btn btn-danger ml-2" (click)="cancelar('EMP')" >Cancelar</button> </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+    <div class="row">
+      <div class="col">
+        <div class="alert alert-success" role="alert" *ngIf="bandDelete">
+            <strong>Dato eliminado!</strong>
+        </div>
+        <div class="alert alert-success" role="alert" *ngIf="bandInsert">
+          <strong>Dato agregado!</strong>
+      </div>
+      </div>
+    </div>
+
+</div>
